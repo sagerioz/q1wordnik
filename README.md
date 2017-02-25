@@ -14,7 +14,7 @@
 #### Students, authors, FaceBook posters
 
 ## How will your project solve this problem?
-#### With API calls, this app will offer tutelage in specific word definitions, etymology, examples of use, #### related words and frequency (word usage over time). This will provide the user the opportunity to #### choose different and better words in the writing process.
+#### With API calls, this app will offer tutelage in specific word definitions, etymology, examples of use, related words and frequency (word usage over time). This will provide the user the opportunity to choose different and better words in the writing process.
 
 ## What inputs does it need?
 #### A word to search or a body of text in a text file.
