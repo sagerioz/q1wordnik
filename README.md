@@ -8,7 +8,7 @@
 ####WordTweeze - Groom Your Essays, Letters and Poems with Tools that Build Language Skills
 
 ## What problem does your project solve?
-####In essays, letters and poems, this app will help authors expand vocabulary, expand their understanding ####of the words they already use, and see visually how many times they choose to use words with a word count.
+####In essays, letters and poems, this app will help authors expand vocabulary, expand their understanding of the words they already use, and see visually how many times they choose to use words with a word count.
 
 ## Who has this problem?
 #### Students, authors, FaceBook posters
