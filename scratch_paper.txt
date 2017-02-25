@@ -1,0 +1,10 @@
+<script>
+  // this jquery function (load) should allow me to load just the div section
+  $(function() {
+    $('#siteloader').load('https://www.last.fm/music/Ed+Sheeran/_/Shape+of+You/+lyrics/&api_key=13f0f1aba08ae1b9ef1904bd41aca350');
+  });
+</script>
+
+<script>
+  $("#siteloader").html('<object data="http://tired.com/">');
+</script>
