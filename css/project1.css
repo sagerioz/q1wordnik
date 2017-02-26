@@ -5,14 +5,14 @@ body {
 }
 #navbar {
   transition: background-color 2.0s ease;
-  background-color: #341539;
+  background-color: #551c5e;
 }
 #navbar:hover {
   background-color: #551c5e;
 }
 .navbar-inverse .navbar-collapse, .navbar-form {
-    border-color: #341539;
-    background-color: #341539;
+    border-color: #551c5e;
+    background-color: #551c5e;
 
 }
 .navbar-fixed-top {
@@ -29,10 +29,10 @@ h4 {
 }
 h1 {
   font-family: 'Sorts Mill Goudy', serif;
-  font-size: 48px;
+  font-size: 50px;
 }
 .navbar-inverse {
-  background-color: #341539;
+  background-color: #551c5e;
 }
 @media screen and (max-width: 768px) {
   .sidebar {
@@ -52,3 +52,22 @@ a .navbar-brand {
 .navbar-header {
   color: #ff536e;
 }
+#target_ul {
+    padding: 0;
+    list-style-type: none;
+    margin: 0;
+}
+.placeholders {
+    margin-bottom: 30px;
+}
+#displayDiv {
+  display: inline-block;
+}
+.navbar-inverse .navbar-brand {
+    color: #ff536e;
+}
+.nav-sidebar > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus {
+    color: #fff;
+    background-color: #79326b;
+}
+/*dashboard.css:58*/

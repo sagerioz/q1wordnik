@@ -63,7 +63,7 @@ body {
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
   color: #fff;
-  background-color: #428bca;
+  background-color: #8a336d;
 }
 
 
@@ -91,7 +91,7 @@ body {
 
 .placeholders {
   margin-bottom: 30px;
-  text-align: center;
+  /*text-align: center;*/
 }
 .placeholders h4 {
   margin-bottom: 0;
