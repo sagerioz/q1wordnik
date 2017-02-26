@@ -6,12 +6,21 @@ $('#search').click(function(){
   if(userInput.length > 0){
 
     const processResults = (data) => {
-      // let collection = $('#displayDiv')
-      // collection[0].innerHTML = '';
+      let displayWordToTweeze = $('#mainTitle')[0]
+      let displayInfoArea = $('<ul>')[0]
+      displayInfoArea.innerHTML = ''
+      console.log("ul", displayInfoArea);
+      // wordToTweeze.innerHTML = '';
       // collection.show();
+      let tweeze = data[0]
+      displayWordToTweeze.innerHTML = `&ldquo;<em>${data[0].word} </em>&rdquo;`;
+      $('#target_ul').append(`<li><p class="special">Part of Speech </p>${tweeze.partOfSpeech}</li>`)
+      $('#target_ul').append(`<li><p class="special">Definition </p>${tweeze.text}</li>`)
+
+      console.log("WORD TO TWEEZE", data[0].word);
       console.log("DATA", data)
-      console.log(data[0].partOfSpeech)
-      console.log(data[0].text);
+      console.log(tweeze.partOfSpeech)
+      console.log(tweeze.text);
       //go thru each movie from the json object
       // for (var i = 0; i < data.Search.length; i++) {
       //   console.log(data.Search[i]);
