@@ -8,3 +8,8 @@
 <script>
   $("#siteloader").html('<object data="http://tired.com/">');
 </script>
+
+to do's
+==========
+local storage for favorite words
+print, save, share, copy buttons

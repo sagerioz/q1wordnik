@@ -75,9 +75,19 @@
           <li><a href="#">Profile</a></li>
           <li><a href="#">Help</a></li>
         </ul>
+        <!-- ====================search button==================== -->
+
+        <!-- <div id="sb-search" class="sb-search">
+        	<form>
+        		<input class="sb-search-input" placeholder="Enter your search term..." type="search" value="" name="search" id="search">
+        		<input class="sb-search-submit" type="submit" value="">
+        		<span class="sb-icon-search"></span>
+        	</form> -->
+
+
         <form class="navbar-form navbar-right">
-          <input type="text" class="form-control" placeholder="Search...">
-          <button id="search">Go</button>
+          <input type="text" class="form-control" placeholder="tweeze a word">
+          <button type="button" class="btn btn-default btn-sm" id="search"><span class="glyphicon glyphicon-ok"></span> </button>
         </form>
       </div>
     </div>
@@ -112,13 +122,22 @@
         </ul>
       </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-  <h1 class="page-header" id="mainTitle">Dashboard</h1>
+  <h1 class="page-header" id="mainTitle">Welcome</h1>
   <div class="row placeholders">
     <div id="displayDiv">
-      <ul id="target_ul"></ul>
-
-
+      <ul class="nav" id="target_ul"></ul>
     </div>
+    <table class="table" id="main_table">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+    </tbody>
+  </table>
   </div>
 </div>
 </div>
