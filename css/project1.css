@@ -102,3 +102,7 @@ a {
 .btn-default {
   border-color: #ff536e;
 }
+.table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 1px solid #ff536e;
+}
