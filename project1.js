@@ -127,10 +127,11 @@ $(document).ready(function() {
         }
       })
 
-    }else if ($(event.target).is('#entymology')) {
+    }else if ($(event.target).is('#etymology')) {
       $.ajax({
         method: 'GET',
-        url: `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/etymologies?useCanonical=true&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
+        url:
+        `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/relatedWords?useCanonical=false&relationshipTypes=etymologically-related-term&limitPerRelationshipType=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
         dataType: 'json',
         success: function(data) {
           return entymologyFunc(data)
@@ -140,10 +141,24 @@ $(document).ready(function() {
         }
       })
 
+    // }else if ($(event.target).is('#entymology')) {
+    //   $.ajax({
+    //     method: 'GET',
+    //     url: `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/etymologies?useCanonical=true&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
+    //     dataType: 'json',
+    //     success: function(data) {
+    //       return entymologyFunc(data)
+    //     },
+    //     error: function() {
+    //       alert("Something went wrong with our query")
+    //     }
+    //   })
+
     }
 
   })
 
+// ================================= functions ==================================
   const processRhymes = (data) => {
     let tweeze = data[0]
     if (tweeze !== undefined) {
@@ -170,20 +185,57 @@ $(document).ready(function() {
     for (let i = 1; i < data.length; i++) {
       let definition = data[i].text
       console.log("DEFINITIONS DATA LOOP", data[i].text);
-      $('#target_ul').append(`<li><p class="special"><b>Definition ${i} </b><em>${definition}</em></p></li>`)
+      $('#target_ul').append(`<li><p class="special"><b>${i}. </b><em>${definition}</em></p></li>`)
     }
   }
 
   const entymologyFunc = (data) => {
-      console.log("ENTYMOLOGY DATA LOOP XML", data);
-      let xmlDoc = $.parseXML( data )
-      let $xml = $( xmlDoc )
-       console.log("ENTYMOLOGY DATA LOOP AFTER PARSING", $xml);
+      console.log("ENTYMOLOGY DATA LOOP", data);
+      let tweeze = data[0]
+      if (tweeze !== undefined) {
+        $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+        $('#tbody').append(
+          `<td><p class="special"><b>History and evolution of ${keySearchTerm}</b></p></td>
+       <td><em>${tweeze.words}</em></p></td>
+       <td></td>`)
+        console.log("KEYSEARCHTERM", keySearchTerm);
+        console.log("WORD TO entmology-ize", data[0].words);
+        console.log("DATA", data)
+        console.log(tweeze.partOfSpeech)
+        console.log(tweeze.text);
+      } else {
+        $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+        $('#tbody').append(
+          `<td><p class="special"><em>Sorry, no examples of etymology for ${keySearchTerm} available.</em></p></td>
+       <td></td>
+       <td></td>`)
+      }
+      // let xmlDoc = $.parseXML( data )
+      // let $xml = $( xmlDoc )
+      //  console.log("ENTYMOLOGY DATA LOOP AFTER PARSING", $xml);
     }
 
     const synonymFunc = (data) => {
         console.log("SYNONYM DATA", data);
-
+        let tweeze = data[0]
+        if (tweeze !== undefined) {
+          $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+          $('#tbody').append(
+            `<td><p class="special"><b>Synonyms for ${keySearchTerm}</b></p></td>
+         <td><em>${tweeze.words}</em></p></td>
+         <td></td>`)
+          console.log("KEYSEARCHTERM", keySearchTerm);
+          console.log("SYNONYM", data[0].words);
+          console.log("DATA", data)
+          console.log(tweeze.partOfSpeech)
+          console.log(tweeze.text);
+        } else {
+          $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+          $('#tbody').append(
+            `<td><p class="special"><em>Sorry, no synonyms available for ${keySearchTerm}.</em></p></td>
+         <td></td>
+         <td></td>`)
+        }
       }
   // }
   // end document ready
