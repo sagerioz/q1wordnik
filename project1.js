@@ -141,21 +141,72 @@ $(document).ready(function() {
         }
       })
 
-    // }else if ($(event.target).is('#entymology')) {
-    //   $.ajax({
-    //     method: 'GET',
-    //     url: `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/etymologies?useCanonical=true&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
-    //     dataType: 'json',
-    //     success: function(data) {
-    //       return entymologyFunc(data)
-    //     },
-    //     error: function() {
-    //       alert("Something went wrong with our query")
-    //     }
-    //   })
+    } else if ($(event.target).is('#same-context')) {
+      $.ajax({
+        method: 'GET',
+        url: `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/relatedWords?useCanonical=false&relationshipTypes=same-context&limitPerRelationshipType=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
+        dataType: 'json',
+        success: function(data) {
+          return sameContextFunc(data)
+        },
+        error: function() {
+          alert("Something went wrong with our query")
+        }
+      })
+
+    } else if ($(event.target).is('#antonym')) {
+      $.ajax({
+        method: 'GET',
+        url: `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/relatedWords?useCanonical=false&relationshipTypes=antonym&limitPerRelationshipType=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
+        dataType: 'json',
+        success: function(data) {
+          return antonymFunc(data)
+        },
+        error: function() {
+          alert("Something went wrong with our query")
+        }
+      })
+
+    }else if ($(event.target).is('#crossRef')) {
+      $.ajax({
+        method: 'GET',
+        url: `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/relatedWords?useCanonical=false&relationshipTypes=cross-reference&limitPerRelationshipType=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
+        dataType: 'json',
+        success: function(data) {
+          return crossRefFunc(data)
+        },
+        error: function() {
+          alert("Something went wrong with our query")
+        }
+      })
+
+    }else if ($(event.target).is('#example')) {
+      $.ajax({
+        method: 'GET',
+        url: `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/topExample?useCanonical=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
+        dataType: 'json',
+        success: function(data) {
+          return exampleFunc(data)
+        },
+        error: function() {
+          alert("Something went wrong with our query")
+        }
+      })
+
+    }else if ($(event.target).is('#pronounciation')) {
+      $.ajax({
+        method: 'GET',
+        url:`http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/audio?useCanonical=false&limit=50&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
+        dataType: 'json',
+        success: function(data) {
+          return pronounciationFunc(data)
+        },
+        error: function() {
+          alert("Something went wrong with our query")
+        }
+      })
 
     }
-
   })
 
 // ================================= functions ==================================
@@ -164,7 +215,7 @@ $(document).ready(function() {
     if (tweeze !== undefined) {
       $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
       $('#tbody').append(
-        `<td><p class="special"><b>Rhyming words</b></p></td>
+        `<td><p class="special"><b>Rhyming words for ${keySearchTerm}</b></p></td>
      <td><em>${tweeze.words}</em></p></td>
      <td></td>`)
       console.log("KEYSEARCHTERM", keySearchTerm);
@@ -175,7 +226,7 @@ $(document).ready(function() {
     } else {
       $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
       $('#tbody').append(
-        `<td><p class="special"><em>Sorry, no rhyming words available.</em></p></td>
+        `<td><p class="special"><em>Sorry, no rhyming words for ${keySearchTerm} available.</em></p></td>
      <td></td>
      <td></td>`)
     }
@@ -206,8 +257,8 @@ $(document).ready(function() {
       } else {
         $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
         $('#tbody').append(
-          `<td><p class="special"><em>Sorry, no examples of etymology for ${keySearchTerm} available.</em></p></td>
-       <td></td>
+          `<td><p class="special"><b>Etymology</b> <td> <em>Sorry, no examples of etymology for "${keySearchTerm}" available.</em></p></td>
+      </td>
        <td></td>`)
       }
       // let xmlDoc = $.parseXML( data )
@@ -237,6 +288,91 @@ $(document).ready(function() {
          <td></td>`)
         }
       }
+
+      const sameContextFunc = (data) => {
+          console.log("same context DATA", data);
+          let tweeze = data[0]
+          if (tweeze !== undefined) {
+            $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+            $('#tbody').append(
+              `<td><p class="special"><b>Words that could be found in the same context as "${keySearchTerm}"</b></p></td>
+           <td><em>${tweeze.words}</em></p></td>
+           <td></td>`)
+            console.log("KEYSEARCHTERM", keySearchTerm);
+            console.log("SYNONYM", data[0].words);
+            console.log("DATA", data)
+            console.log(tweeze.partOfSpeech)
+            console.log(tweeze.text);
+          } else {
+            $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+            $('#tbody').append(
+              `<td><p class="special"><em>Sorry, no "same context" data available for ${keySearchTerm}.</em></p></td>
+           <td></td>
+           <td></td>`)
+          }
+        }
+
+        const antonymFunc = (data) => {
+            console.log("same context DATA", data);
+            let tweeze = data[0]
+            if (tweeze !== undefined) {
+              $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+              $('#tbody').append(
+                `<td><p class="special"><b>Antonyms for "${keySearchTerm}"</b></p></td>
+             <td><em>${tweeze.words}</em></p></td>
+             <td></td>`)
+              console.log("antonymn", keySearchTerm);
+              console.log("SYNONYM", data[0].words);
+              console.log("DATA", data)
+              console.log(tweeze.partOfSpeech)
+              console.log(tweeze.text);
+            } else {
+              $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+              $('#tbody').append(
+                `<td><p class="special"><b>Antonyms </td><td></b><em>Sorry, no antonyms available for "${keySearchTerm}".</em></p>
+             </td>
+             <td></td>`)
+            }
+          }
+
+          const crossRefFunc = (data) => {
+              console.log("same context DATA", data);
+              let tweeze = data[0]
+              if (tweeze !== undefined) {
+                $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+                $('#tbody').append(
+                  `<td><p class="special"><b>Cross references for "${keySearchTerm}"</b></p></td>
+               <td><em>${tweeze.words}</em></p></td>
+               <td></td>`)
+              } else {
+                $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+                $('#tbody').append(
+                  `<td><p class="special"><em>Sorry, no cross-refernce data available for "${keySearchTerm}".</em></p></td>
+               <td></td>
+               <td></td>`)
+              }
+            }
+
+            const exampleFunc = (data) => {
+                console.log("same context DATA", data);
+                console.log("EXAMPLE", data);
+                let tweeze = data
+                if (tweeze !== undefined) {
+                  $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+                  $('#tbody').append(
+                    `<td><p class="special"><b>Example of use for "${keySearchTerm}"</b></p></td>
+                 <td><em>${tweeze.text}</em></p></td>
+                 <td></td>`)
+                } else {
+                  $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+                  $('#tbody').append(
+                    `<td><p class="special"><em>Sorry, no examples available for "${keySearchTerm}".</em></p></td>
+                 <td></td>
+                 <td></td>`)
+                }
+              }
+
+              
   // }
   // end document ready
 })
