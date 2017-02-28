@@ -67,7 +67,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-        <a class="navbar-brand" href="#" id="logo" style="color: #ff536e">WordTweeze</a>
+        <a class="navbar-brand" href="./index.html" id="logo" style="color: #ff536e">WordTweeze</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-left">
@@ -76,20 +76,12 @@
           <li><a href="#">Profile</a></li>
           <li><a href="#">Help</a></li>
         </ul>
-        <!-- ====================search button==================== -->
-
-        <!-- <div id="sb-search" class="sb-search">
-        	<form>
-        		<input class="sb-search-input" placeholder="Enter your search term..." type="search" value="" name="search" id="search">
-        		<input class="sb-search-submit" type="submit" value="">
-        		<span class="sb-icon-search"></span>
-        	</form> -->
 
 
-        <form class="navbar-form navbar-right">
+        <!-- <form class="navbar-form navbar-right">
           <input type="text" class="form-control" placeholder="tweeze a word">
           <button type="button" class="btn btn-default btn-sm" id="search"><span class="glyphicon glyphicon-ok"></span> </button>
-        </form>
+        </form> -->
       </div>
     </div>
   </nav>
@@ -99,61 +91,31 @@
       <div class="col-sm-3 col-md-2 sidebar">
 
         <ul class="nav nav-sidebar">
-          <li class="active"><a href="./overview.html">Overview <span class="sr-only">(current)</span></a></li>
+          <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
           <!-- <li><a href="#">Reports</a></li>
           <li><a href="#">Analytics</a></li>
           <li><a href="#">Export</a></li> -->
         </ul>
-        <ul class="nav nav-sidebar" id="nav_sidebar_actions">
-          <li><a href="" id="example">Example</a></li>
-          <li><a href="" id="definitions">More Definitions</a></li>
-          <li><a href="#" data-toggle="dropdown" class="dropdown-toggle">Related Words <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="#" id="synonym">synonym</a></li>
-              <li><a href="#" id="antonym">antonym</a></li>
-              <li><a href="#" id="same-context">same-context</a></li>
-              <li><a href="#" id="etymology">etymology</a></li>
-              <li><a href="#" id="crossRef">cross-reference</a></li>
-
-              <li class="divider"></li>
-              <li><a href="#" id="clear">Clear All</a></li>
-            </ul>
-          </li>
-
-
-
-          <li><a href="" id="pronounciation">Pronounciation</a></li>
-          <li><a href="" id="frequency">Frequency</a></li>
-          <li><a href="" id="phrases">Phrases</a></li>
-          <li><a href="" id="rhymes">Rhyming</a></li>
-
-
-        </ul>
-        <ul class="nav nav-sidebar">
-          <li><a href="" id="WOTD">Word of the Day</a></li>
-          <!-- <li><a href="">One more nav</a></li>
-          <li><a href="">Another nav item</a></li> -->
-        </ul>
       </div>
-      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1 class="page-header" id="mainTitle">Welcome</h1>
-        <div class="row placeholders">
-          <div id="displayDiv">
-            <ul class="nav" id="target_ul"></ul>
+      <main>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header" id="">Welcome</h1>
+          <div class="row placeholders">
+            <div class="content_column">
+              <ul class="nav" id="target_ul">
+                <li><h2>Word Tweeze</h2></li>
+                <p>Groom Your Essays, Letters and Poems with Tools that Build Language Skills</p>
+<p>Here you can find specific word definitions, etymology, examples of use, related words and frequency (word usage over time). This provides the opportunity to choose different and better words in the writing process.</p>
+<p>To get started, return to the <a href="index.html">search page</a> and enter a word to tweeze!</p>
+
+<img src="images/humptydumpty.png"/>
+<li><small>Powered by <a href="https://www.wordnik.com/about">Wordnik API</a></small></li>
+</ul>
+            </div>
+
           </div>
-          <table class="table" id="main_table">
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody id="tbody">
-            </tbody>
-          </table>
         </div>
-      </div>
+      </main>
     </div>
 
     <!-- Bootstrap core JavaScript
