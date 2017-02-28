@@ -1,5 +1,5 @@
     /* Search icon by IcoMoon, made with http://icomoon.io/app/ */
-
+/*320, 768, 1024*/
 @font-face {
     font-family: 'icomoon';
     src: url('../fonts/icomoon/icomoon.eot');
@@ -72,6 +72,10 @@ button#search:focus {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+  }
+  img {
+    float: left;
+    margin-right: 15px;
   }
 }
 @media screen and (max-width: 768px) {

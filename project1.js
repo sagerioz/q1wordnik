@@ -2,6 +2,8 @@
 
 $(document).ready(function() {
   let keySearchTerm = ''
+  // let modal = $('#basicModal').modal();
+  // console.log("MODAL",modal);
   //word of the day upon page load
 
   $.ajax({
@@ -21,11 +23,12 @@ $(document).ready(function() {
   const initialPageLoad = (data) => {
     let displayWordToTweeze = $('#mainTitle')[0]
     let displayInfoArea = $('#target_ul')[0]
+    let mainDiv = $('#main_div')[0]
+    $(displayInfoArea).append(`<img src="images/alice1.jpeg"/><h2>Word of the Day</h1>`)
     displayWordToTweeze.innerHTML = `&ldquo;<em>${data.word} </em>&rdquo;`;
     $('#target_ul').append(`<li><p class="special"><b>Word of the Day </b><em> ${data.word}</em></p></li>`)
     $('#target_ul').append(`<li><p class="special"><b>Definition </b><em>${data.note}</em></p></li>`)
   }
-
 
   $('#search').click(function() {
     event.preventDefault()
@@ -58,12 +61,13 @@ $(document).ready(function() {
           return processResults(data)
         },
         error: function() {
-          $('input').val("Enter something here to search").focus()
-          alert("Error: enter a word to search")
+          $('input').val("Search a word").focus()
+          $('#myModal').modal("Error: something went wrong with your API search!");
         }
       })
     } else {
-      $('input').val("Enter something here to search")
+      $('input').val("Search a word")
+      $('#myModal').modal("What would you like to seach?");
     }
   })
 
@@ -83,7 +87,8 @@ $(document).ready(function() {
         },
         error: function() {
           $('input').val("Search word").focus()
-          alert("Enter a word to search")
+          //alert("Enter a word to search")
+          $('#myModal').modal("What would you like to search?");
         }
       })
     } else if ($(event.target).is('#definitions')) {
@@ -96,7 +101,7 @@ $(document).ready(function() {
         },
         error: function() {
           $('input').val("Search word").focus()
-          alert("Enter a word to search")
+          $('#myModal').modal("What would you like to search?");
         }
       })
     } else if ($(event.target).is('#WOTD')) {
@@ -124,7 +129,7 @@ $(document).ready(function() {
         },
         error: function() {
           $('input').val("Search word").focus()
-          alert("Enter a word to search")
+          $('#myModal').modal("What would you like to search?");
         }
       })
 
@@ -139,7 +144,7 @@ $(document).ready(function() {
         },
         error: function() {
           $('input').val("Search word").focus()
-          alert("Enter a word to search")
+          $('#myModal').modal("What would you like to search?");
         }
       })
 
@@ -153,7 +158,7 @@ $(document).ready(function() {
         },
         error: function() {
           $('input').val("Search word").focus()
-          alert("Enter a word to search")
+          $('#myModal').modal("What would you like to search?");
         }
       })
 
@@ -167,7 +172,7 @@ $(document).ready(function() {
         },
         error: function() {
           $('input').val("Search word").focus()
-          alert("Enter a word to search")
+          $('#myModal').modal("What would you like to search?");
         }
       })
 
@@ -181,7 +186,7 @@ $(document).ready(function() {
         },
         error: function() {
           $('input').val("Search word").focus()
-          alert("Enter a word to search")
+          $('#myModal').modal("What would you like to search?");
         }
       })
 
@@ -195,7 +200,7 @@ $(document).ready(function() {
         },
         error: function() {
           $('input').val("Search word").focus()
-          alert("Enter a word to search")
+          $('#myModal').modal("What would you like to search?");
         }
       })
 
@@ -209,8 +214,7 @@ $(document).ready(function() {
         },
         error: function() {
           $('input').val("Search word").focus()
-          alert("Enter a word to search")
-        }
+          $('#myModal').modal('show');       }
       })
 
     }else if ($(event.target).is('#clear')) {
