@@ -14,6 +14,9 @@ body {
     line-height: 1.62;
     font-family: 'Source Code Pro', monospace;
 }
+#editor-container {
+  height: 375px;
+}
 
 #navbar {
     transition: background-color 2.0s ease;
@@ -147,5 +150,9 @@ button#search:focus {
      display: inline-block;
      width: 150px;
      vertical-align: middle;
+   }
+   .footer {
+     display: inline-block;
+     text-align: center;
    }
 }

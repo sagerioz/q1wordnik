@@ -105,6 +105,8 @@ $(document).ready(function() {
         }
       })
     } else if ($(event.target).is('#WOTD')) {
+      event.preventDefault();
+      console.log($('hey'));
       $.ajax({
         method: 'GET',
         url: `http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5
@@ -219,6 +221,7 @@ $(document).ready(function() {
 
     }else if ($(event.target).is('#clear')) {
           $('tbody').children().remove();
+          $('#target_ul').empty()
     }
   })
 

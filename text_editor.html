@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
 
-  <title>Dashboard Template for Bootstrap</title>
+  <title>WordTweeze Text Editor</title>
 
   <!-- Bootstrap core CSS -->
   <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -37,12 +37,12 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 
   <!-- Main Quill library -->
-  <script src="//cdn.quilljs.com/1.2.0/quill.js"></script>
-  <script src="//cdn.quilljs.com/1.2.0/quill.min.js"></script>
+  <script src="https://cdn.quilljs.com/1.2.0/quill.js"></script>
+  <script src="https://cdn.quilljs.com/1.2.0/quill.min.js"></script>
 
   <!-- Theme included stylesheets for Quill -->
-  <link href="//cdn.quilljs.com/1.2.0/quill.snow.css" rel="stylesheet">
-  <link href="//cdn.quilljs.com/1.2.0/quill.bubble.css" rel="stylesheet">
+  <link href="https://cdn.quilljs.com/1.2.0/quill.snow.css" rel="stylesheet">
+  <link href="https://cdn.quilljs.com/1.2.0/quill.bubble.css" rel="stylesheet">
 
   <!-- JQuery -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
@@ -91,9 +91,6 @@
 
         <ul class="nav nav-sidebar">
           <li class="active"><a href="./overview.html">Overview <span class="sr-only">(current)</span></a></li>
-          <!-- <li><a href="#">Reports</a></li>
-          <li><a href="#">Analytics</a></li>
-          <li><a href="#">Export</a></li> -->
         </ul>
         <ul class="nav nav-sidebar" id="nav_sidebar_actions">
           <li><a href="" id="example">Example</a></li>
@@ -121,24 +118,96 @@
 
         </ul>
         <ul class="nav nav-sidebar">
-          <li><a href="" id="WOTD">Word of the Day</a></li>
-          <!-- <li><a href="">One more nav</a></li>
-          <li><a href="">Another nav item</a></li> -->
+          <li><a href="" id="">Word of the Day</a></li>
         </ul>
       </div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1 class="page-header" id="">Editor</h1>
-        <!-- Create the editor container -->
-  <div id="editor">
-    <p>Hello World!</p>
-    <p>Some initial <strong>bold</strong> text</p>
-    <p><br></p>
-  </div>
+        <h1 class="page-header" id="mainTitle">Editor</h1>
+        <div id="displayDiv">
+          <ul class="nav" id="target_ul"></ul>
+          <table class="table" id="main_table">
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+          </table>
+        </div>
+
+<!-- Create the editor container -->
+<!-- ====================================================================== -->
+
+
+
+<div id="toolbar">
+</div>
+<div id="editor">
+</div>
+<button type="button" name="button" id="saveDelta">Save</button>
   <!-- Initialize Quill editor -->
 <script>
-  var quill = new Quill('#editor', {
-    theme: 'snow'
-  });
+// var BackgroundClass = Quill.import('attributors/class/background');
+// var ColorClass = Quill.import('attributors/class/color');
+// var SizeStyle = Quill.import('attributors/style/size');
+// Quill.register(BackgroundClass, true);
+// Quill.register(ColorClass, true);
+// Quill.register(SizeStyle, true);
+var toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],
+  ['blockquote', 'code-block'],
+  [{'list': 'ordered'}, {'list': 'bullet'}],
+  [{'indent': '-1'}, {'indent': '+1'}],
+  [{'size': ['small', false, 'large', 'huge']}],
+  ['link','image','video','formula'],
+  [{'color': []}, {'background': []} ],
+  [{'font': []}],
+  [{'align': []}]
+
+]
+var delta = {}
+var quill = new Quill('#editor', {
+  debug: 'info',
+modules: {
+  toolbar: toolbarOptions
+},
+placeholder: 'Compose...',
+theme: 'snow'
+});
+quill.clipboard.addMatcher (Node.ELEMENT_NODE, function (node, delta) {
+    var plaintext = $ (node).text();
+    return new Delta().insert (plaintext);
+});
+// $('#saveDelta').click(function(){
+//   window.delta = quill.getContents()
+//   console.log(delta);
+// })
+quill.clipboard.addMatcher(Node.TEXT_NODE, function(node, delta) {
+  return new Delta().insert(node.data);
+});
+
+function get_selection() {
+    var txt = '';
+    if (window.getSelection) {
+        txt = window.getSelection();
+    } else if (document.getSelection) {
+        txt = document.getSelection();
+    } else if (document.selection) {
+        txt = document.selection.createRange().text;
+    }
+    return txt;
+}
+
+$(document).dblclick(function(e) {
+    var t = get_selection();
+    keySearchTerm = t;
+    $('input').val(t)
+    alert(t);
+
+});
 </script>
       </div>
     </div>
