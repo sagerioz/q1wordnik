@@ -13,3 +13,12 @@ to do's
 ==========
 local storage for favorite words
 print, save, share, copy buttons
+
+presentation notes
+==================
+
+Quill is trying to be the WYSIWYG editor for the web (as Microsoft Word is for printing)
+handles markup language, embedded videos etc, (maybe not the best choice for this exact project)
+mobile first
+competitor to Medium (another text editor)
+relatively easy to install

@@ -2,9 +2,6 @@
 
 $(document).ready(function() {
   let keySearchTerm = ''
-  // let modal = $('#basicModal').modal();
-  // console.log("MODAL",modal);
-  //word of the day upon page load
 
   $.ajax({
     method: 'GET',
@@ -16,15 +13,11 @@ $(document).ready(function() {
     },
     error: function() {
       $('input').val("Enter something here to search")
-      $('#target_ul').append(`<li><p class="special"><b>Sorry, </b><em>something went wrong with our query</em></p></li>`)
+      $('#target_ul').append(`<li><p class="special">Sorry, <em>something went wrong with our query</em></p></li>`)
     }
   })
 
   const wordOfTheDayFunc = (data) => {
-    // let displayWordToTweeze = $('#mainTitle')[0]
-    // let displayInfoArea = $('#target_ul')[0]
-    // let mainDiv = $('#main_div')[0]
-//    displayWordToTweeze.innerHTML = `&ldquo;<em>${data.word} </em>&rdquo;`;
     $('#target_ul').append(`<li><p class="special">Word of the Day </p><p><em> ${data.word}</em></p></li>`)
     $('#target_ul').append(`<li><p class="special">Definition </p><p><em>${data.note}</em></p></li>`)
   }
@@ -66,7 +59,6 @@ $(document).ready(function() {
       })
     } else {
       $('input').val("Search a word")
-      $('#myModal').modal("What would you like to seach?");
     }
   })
 
@@ -74,7 +66,6 @@ $(document).ready(function() {
 $("#second_nav_sidebar_actions").click(function(){
   if($(event.target).is("#WOTD")){
     event.preventDefault();
-    console.log($('hey it works'));
     $.ajax({
       method: 'GET',
       url: `http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5
@@ -94,18 +85,19 @@ $("#second_nav_sidebar_actions").click(function(){
 
   $("#nav_sidebar_actions").click(function() {
     event.preventDefault()
-    console.log("YOUR EVENT TARGET IS HERE:", event.target);
     if ($(event.target).is('#rhymes')) {
       $.ajax({
         method: 'GET',
         url: `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/relatedWords?useCanonical=true&relationshipTypes=rhyme&limitPerRelationshipType=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
         dataType: 'json',
         success: function(data) {
-          return processRhymes(data)
+          if($('#target_ul').children('li').hasClass('rhymes')){}
+          else{
+            return rhymeFunc(data)
+          }
         },
         error: function() {
           $('input').val("Search word").focus()
-          //alert("Enter a word to search")
           $('#myModal').modal("What would you like to search?");
         }
       })
@@ -115,7 +107,10 @@ $("#second_nav_sidebar_actions").click(function(){
         url: `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/definitions?limit=5&includeRelated=true&sourceDictionaries=all&useCanonical=true&includeTags=true&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
         dataType: 'json',
         success: function(data) {
-          return processDefinitions(data)
+          if($('#target_ul').children('li').hasClass('definitions')){}
+          else{
+            return definitionsFunc(data)
+          }
         },
         error: function() {
           $('input').val("Search word").focus()
@@ -129,7 +124,10 @@ $("#second_nav_sidebar_actions").click(function(){
         url:       `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/relatedWords?useCanonical=false&relationshipTypes=synonym&limitPerRelationshipType=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
         dataType: 'json',
         success: function(data) {
-          return synonymFunc(data)
+          if($('#tbody').children('td').hasClass('synonym')){}
+          else{
+            return synonymFunc(data)
+          }
         },
         error: function() {
           $('input').val("Search word").focus()
@@ -144,7 +142,10 @@ $("#second_nav_sidebar_actions").click(function(){
         `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/relatedWords?useCanonical=false&relationshipTypes=etymologically-related-term&limitPerRelationshipType=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
         dataType: 'json',
         success: function(data) {
-          return entymologyFunc(data)
+          if($('#tbody').children('td').hasClass('etymology')){}
+          else{
+            return entymologyFunc(data)
+          }
         },
         error: function() {
           $('input').val("Search word").focus()
@@ -158,7 +159,10 @@ $("#second_nav_sidebar_actions").click(function(){
         url: `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/relatedWords?useCanonical=false&relationshipTypes=same-context&limitPerRelationshipType=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
         dataType: 'json',
         success: function(data) {
-          return sameContextFunc(data)
+          if($('#tbody').children('td').hasClass('same_context')){}
+          else{
+            return sameContextFunc(data)
+          }
         },
         error: function() {
           $('input').val("Search word").focus()
@@ -172,7 +176,10 @@ $("#second_nav_sidebar_actions").click(function(){
         url: `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/relatedWords?useCanonical=false&relationshipTypes=antonym&limitPerRelationshipType=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
         dataType: 'json',
         success: function(data) {
-          return antonymFunc(data)
+          if($('#tbody').children('td').hasClass('antonym')) {}
+          else{
+            return antonymFunc(data)
+          }
         },
         error: function() {
           $('input').val("Search word").focus()
@@ -186,7 +193,10 @@ $("#second_nav_sidebar_actions").click(function(){
         url: `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/relatedWords?useCanonical=false&relationshipTypes=cross-reference&limitPerRelationshipType=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
         dataType: 'json',
         success: function(data) {
-          return crossRefFunc(data)
+          if($('#tbody').children('td').hasClass('cross_ref')){}
+          else{
+            return crossRefFunc(data)
+          }
         },
         error: function() {
           $('input').val("Search word").focus()
@@ -200,7 +210,10 @@ $("#second_nav_sidebar_actions").click(function(){
         url: `http://api.wordnik.com:80/v4/word.json/${keySearchTerm}/topExample?useCanonical=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
         dataType: 'json',
         success: function(data) {
-          return exampleFunc(data)
+          if($('#tbody').children('td').hasClass('example')){}
+          else{
+            return exampleFunc(data)
+          }
         },
         error: function() {
           $('input').val("Search word").focus()
@@ -218,7 +231,6 @@ $("#second_nav_sidebar_actions").click(function(){
           else{
             return pronunciationFunc(data)
           }
-
         },
         error: function() {
           $('input').val("Search word").focus()
@@ -238,34 +250,26 @@ $("#second_nav_sidebar_actions").click(function(){
       $('#target_ul').append(`<li><p class="special">Rhyming</p></b></li>`)
       $('#target_ul').append(`<li><p><em>${tweeze.words}</em></p></li>`)
 
-      // $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      // $('#tbody').append(
-      //   `<td colspan="3"><p class="special"><b>Rhyming words for "${keySearchTerm}" </b></p></td>`)
-      //   $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      //   $('#tbody').append(
-      // `<td colspan="3"><p><em>${tweeze.words}</em></p></td>`)
     } else {
       $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
       $('#tbody').append(
-        `<td colspan="3"><p class="special">Rhyming</p><em> Sorry, no data available for "${keySearchTerm}" available.</em></p></td>`)
+        `<td class="rhymes" colspan="3"><p class="special">Rhyming</p><em> Sorry, no data available for "${keySearchTerm}" available.</em></p></td>`)
     }
   }
 
-  const processDefinitions = (data) => {
+  const definitionsFunc = (data) => {
     for (let i = 1; i < data.length; i++) {
       let definition = data[i].text
-      console.log("DEFINITIONS DATA LOOP", data[i].text);
-      $('#target_ul').append(`<li><p><b>${i}. </b><em>${definition}</em></p></li>`)
+      $('#target_ul').append(`<li class="definitions"><p><b>${i}. </b><em>${definition}</em></p></li>`)
     }
   }
 
   const entymologyFunc = (data) => {
-      console.log("ENTYMOLOGY DATA LOOP", data);
       let tweeze = data[0]
       if (tweeze !== undefined) {
         $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
         $('#tbody').append(
-          `<td colspan="3" class="entymology"><p class="special">History and evolution</p></td>`)
+          `<td class="entymology" colspan="3"><p class="special">History and evolution</p></td>`)
           $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
           $('#tbody').append(
         `<td colspan="3"><p><em>${tweeze.words}</em></p></td>`)
@@ -278,12 +282,11 @@ $("#second_nav_sidebar_actions").click(function(){
     }
 
     const synonymFunc = (data) => {
-        console.log("SYNONYM DATA", data);
         let tweeze = data[0]
         if (tweeze !== undefined) {
           $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
           $('#tbody').append(
-            `<td colspan="3"><p class="special">Synonyms</p></td>`)
+            `<td class="synonym" colspan="3"><p class="special">Synonyms</p></td>`)
             $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
             $('#tbody').append(
           `<td colspan="3"><p><em>${tweeze.words}</em></p></td>`)
@@ -295,12 +298,11 @@ $("#second_nav_sidebar_actions").click(function(){
       }
 
       const sameContextFunc = (data) => {
-          console.log("same context DATA", data);
           let tweeze = data[0]
           if (tweeze !== undefined) {
             $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
             $('#tbody').append(
-              `<td colspan="3" class="same_context"><p class="special">Same context</p></td>`)
+              `<td class="same_context" colspan="3"><p class="special">Same context</p></td>`)
               $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
               $('#tbody').append(
             `<td colspan="3"><p><em>${tweeze.words}</em></p></td>`)
@@ -316,7 +318,7 @@ $("#second_nav_sidebar_actions").click(function(){
             if (tweeze !== undefined) {
               $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
               $('#tbody').append(
-                `<td colspan="3" class="antonym"><p class="special">Antonyms</p></td>`)
+                `<td class="antonym" colspan="3"><p class="special">Antonyms</p></td>`)
                 $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
                 $('#tbody').append(`<td colspan="3"><p><em>${tweeze.words}</em></p></td>`)
             } else {
@@ -331,7 +333,7 @@ $("#second_nav_sidebar_actions").click(function(){
               if (tweeze !== undefined) {
                 $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
                 $('#tbody').append(
-                  `<td colspan="3" class="cross_ref"><p class="special">Cross references</p></td>`)
+                  `<td class="cross_ref" colspan="3"><p class="special">Cross references</p></td>`)
                   $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
                   $('#tbody').append(
                 `<td colspan="3"><p><em>${tweeze.words}</em></p></td>`)
@@ -343,12 +345,11 @@ $("#second_nav_sidebar_actions").click(function(){
             }
 
             const exampleFunc = (data) => {
-                console.log("EXAMPLE", data);
                 let tweeze = data
                 if (tweeze !== undefined) {
                   $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
                   $('#tbody').append(
-                    `<td colspan="3" class="example"><p class="special">Example of use</p></td>`)
+                    `<td class="example" colspan="3"><p class="special">Example of use</p></td>`)
                     $('#tbody').append('<tr class="tr_result_data"></tr>')
                     $('#tbody').append(
                   `<td colspan="2"><p><em>${tweeze.text}</em></p></td><td> </td>`)

@@ -193,11 +193,28 @@ function get_selection() {
     }
     return txt;
 }
+function SelectAll(id)
+{
+    document.getElementById(id).focus();
+    document.getElementById(id).select();
+}
+
+function copy()
+{
+    SelectAll('textAreaID');
+    document.execCommand("Copy", false, null);
+}
+
+quill.setContents({
+    "ops":[
+        {"insert":"this is a test bit of text\n"},
+    ]
+});
 
 $(document).dblclick(function(e) {
-    var t = get_selection();
-    keySearchTerm = t;
-    $('input').val(t)
+    var wordToTweeze = get_selection();
+    keySearchTerm = wordToTweeze;
+    $('input').val(wordToTweeze)
 
 });
 </script>

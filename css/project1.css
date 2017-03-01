@@ -93,6 +93,12 @@
             float: left;
             margin-right: 15px;
         }
+        .footer {
+            display: inline;
+            clear: both;
+            margin: auto;
+            margin-top: 20px;
+        }
     }
 
     @media screen and (max-width: 768px) {
@@ -166,6 +172,7 @@
         }
         .footer {
             display: inline-block;
+            clear: both;
             text-align: center;
         }
     }
