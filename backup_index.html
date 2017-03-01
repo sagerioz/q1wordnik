@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
 
-  <title>WordTweeze Text Editor</title>
+  <title>WordTweeze</title>
 
   <!-- Bootstrap core CSS -->
   <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -67,15 +67,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-        <a class="navbar-brand" href="./index.html" id="logo" style="color: #ff536e">WordTweeze</a>
+        <a class="navbar-brand" href="#" id="logo" style="color: #ff536e">WordTweeze</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-left">
-          <li><a href="#">Text Editor</a></li>
+          <li><a href="./text_editor.html">Text Editor</a></li>
           <li><a href="#">Settings</a></li>
           <li><a href="#">Profile</a></li>
           <li><a href="#">Help</a></li>
         </ul>
+
 
         <form class="navbar-form navbar-right">
           <input type="text" class="form-control" placeholder="tweeze a word">
@@ -103,28 +104,25 @@
               <li><a href="#" id="etymology">etymology</a></li>
               <li><a href="#" id="crossRef">cross-reference</a></li>
 
-              <li class="divider"></li>
-              <li><a href="#" id="clear">Clear All</a></li>
+              <!-- <li class="divider"></li> -->
+              <!-- <li><a href="#" id="clear">Clear All</a></li> -->
             </ul>
           </li>
 
-
-
-          <li><a href="" id="pronounciation">Pronounciation</a></li>
-          <li><a href="" id="frequency">Frequency</a></li>
-          <li><a href="" id="phrases">Phrases</a></li>
-          <li><a href="" id="rhymes">Rhyming</a></li>
-
-
+          <li><a href="#" id="pronounciation">Pronounciation</a></li>
+          <li><a href="#" id="rhymes">Rhyming</a></li>
+          <li><a href="#" id="clear">Clear All</a></li>
         </ul>
         <ul class="nav nav-sidebar">
-          <li><a href="" id="">Word of the Day</a></li>
+          <li><a href="" id="WOTD">Word of the Day</a></li>
         </ul>
       </div>
-      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1 class="page-header" id="mainTitle">Editor</h1>
-        <div id="displayDiv">
-          <ul class="nav" id="target_ul"></ul>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="main-div">
+        <h1 class="page-header" id="mainTitle">Welcome</h1>
+        <div class="row placeholders">
+          <div id="displayDiv">
+            <ul class="nav" id="target_ul"></ul>
+          </div>
           <table class="table" id="main_table">
             <thead>
               <tr>
@@ -137,93 +135,43 @@
             </tbody>
           </table>
         </div>
-
-<!-- Create the editor container -->
-<!-- ====================================================================== -->
-
-
-
-<div id="toolbar">
-</div>
-<div id="editor">
-</div>
-<button type="button" name="button" id="saveDelta">Save</button>
-  <!-- Initialize Quill editor -->
-<script>
-// var BackgroundClass = Quill.import('attributors/class/background');
-// var ColorClass = Quill.import('attributors/class/color');
-// var SizeStyle = Quill.import('attributors/style/size');
-// Quill.register(BackgroundClass, true);
-// Quill.register(ColorClass, true);
-// Quill.register(SizeStyle, true);
-var toolbarOptions = [
-  ['bold', 'italic', 'underline', 'strike'],
-  ['blockquote', 'code-block'],
-  [{'list': 'ordered'}, {'list': 'bullet'}],
-  [{'indent': '-1'}, {'indent': '+1'}],
-  [{'size': ['small', false, 'large', 'huge']}],
-  ['link','image','video','formula'],
-  [{'color': []}, {'background': []} ],
-  [{'font': []}],
-  [{'align': []}]
-
-]
-var delta = {}
-var quill = new Quill('#editor', {
-  debug: 'info',
-modules: {
-  toolbar: toolbarOptions
-},
-placeholder: 'Compose...',
-theme: 'snow'
-});
-quill.clipboard.addMatcher (Node.ELEMENT_NODE, function (node, delta) {
-    var plaintext = $ (node).text();
-    return new Delta().insert (plaintext);
-});
-// $('#saveDelta').click(function(){
-//   window.delta = quill.getContents()
-//   console.log(delta);
-// })
-quill.clipboard.addMatcher(Node.TEXT_NODE, function(node, delta) {
-  return new Delta().insert(node.data);
-});
-
-function get_selection() {
-    var txt = '';
-    if (window.getSelection) {
-        txt = window.getSelection();
-    } else if (document.getSelection) {
-        txt = document.getSelection();
-    } else if (document.selection) {
-        txt = document.selection.createRange().text;
-    }
-    return txt;
-}
-
-$(document).dblclick(function(e) {
-    var t = get_selection();
-    keySearchTerm = t;
-    $('input').val(t)
-    alert(t);
-
-});
-</script>
       </div>
+      <button type="button" name="button" id=>modalMe</button>
     </div>
 
-    <!-- Bootstrap core JavaScript
+
+
+
+    <!--end container div-->
+  </div>
+
+  <!-- ================== modal ====================== -->
+  <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Modal header</h3>
+    </div>
+    <div class="modal-body">
+      <p>Enter a word to search!</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      <button class="btn btn-primary">Save changes</button>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>
-      window.jQuery || document.write('<script src="bootstrap-3.3.7/docs/assets/js/vendor/jquery.min.js"><\/script>')
-    </script>
-    <script src="bootstrap-3.3.7/docs/dist/js/bootstrap.min.js"></script>
-    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="bootstrap-3.3.7/docs/assets/js/vendor/holder.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    window.jQuery || document.write('<script src="bootstrap-3.3.7/docs/assets/js/vendor/jquery.min.js"><\/script>')
+  </script>
+  <script src="bootstrap-3.3.7/docs/dist/js/bootstrap.min.js"></script>
+  <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+  <script src="bootstrap-3.3.7/docs/assets/js/vendor/holder.min.js"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 
 </html>
