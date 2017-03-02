@@ -76,11 +76,6 @@
           <li><a href="#">Profile</a></li>
           <li><a href="#">Help</a></li>
         </ul>
-
-        <!-- <form class="navbar-form navbar-right">
-          <input type="text" class="form-control" placeholder="tweeze a word">
-          <button type="button" class="btn btn-default btn-sm" id="search"><span class="glyphicon glyphicon-ok"></span> </button>
-        </form> -->
       </div>
     </div>
   </nav>
@@ -88,10 +83,6 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
-
-
-
-
         <ul class="nav nav-sidebar">
           <li class="active"><a href="./overview.html">Overview <span class="sr-only">(current)</span></a></li>
         </ul>
@@ -120,10 +111,7 @@
       </li>
       </div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-
         <form class="navbar-form navbar-right">
-
           <input type="text" class="form-control" placeholder="tweeze a word">
           <button type="button" class="btn btn-default btn-sm" id="search"><span class="glyphicon glyphicon-ok"></span> </button>
         </form>
@@ -131,7 +119,7 @@
         <span class="favorite-star-character" id="star"></span>
         <div id="displayDiv">
 
-          <!-- Create the editor container -->
+          <!-- Create the quill editor container -->
 <!-- ====================================================================== -->
 
           <div id="toolbar">
@@ -143,8 +131,6 @@
           <div id="appendFrequency"></div>
 
             <!-- Initialize Quill editor -->
-<!-- ====================================================================== -->
-<!-- ====================================================================== -->
 <!-- ====================================================================== -->
 
           <script >
@@ -226,63 +212,78 @@
           </table>
         </div><br>
 
-<!-- word count functionality -->
-<!-- ====================================================================== -->
-<!-- ====================================================================== -->
+        <!-- word count functionality -->
 <!-- ====================================================================== -->
 
 <script type="text/javascript">
 
 let temp = `Within our society, there is an individual. An individual with individual thoughts and actions. But who determines whether or not that individual is correct in their choices? Are our thoughts brain washed through the media with it's hellish ideas or our closet friends that try to direct us in the right direction? No one may ever know what is right or wrong.
 So what is ethical relativism anyway? And which individual is behind all of the madness of ethical relativism? It is my understanding that relativist's are believed to think that relativism is true. Ethical Relativism is of a mind to say that whatever one's culture says is right is the right thing for him or her to do. This world we human beings live in is not without a variety of many different and diverse cultures with different cultural practices and hence different moralities. Studying ethics from a philosophical point of view, ethical relativist's might conclude that your wasting your time just like philosophers have always wasted they're time.`
+
 let countHolder = {}
 let txtArr = [];
 let keys = [];
 const setUp = (string) => {
-  txtArr = string.split(/\W+/)//splits by all spaces or punctuation. Need a better regex here! For ex., "can't" won't handle well
+  txtArr = string.split(/\W+/)//splits by all that is not a-z or 0-9 : meaning by spaces or punctuation. Need a better regex here! For ex., "can't" won't handle well
   //console.log(txtArr);
+  console.log("text arr",txtArr);
+
   for (var j = 0; j < txtArr.length; j++) {
     let word = txtArr[j].toLowerCase()
+    console.log("WORD", word);
+    if(!/\d+/.test(word)){
     if(countHolder[word]=== undefined){
-      countHolder[word] = 1;
       keys.push(word);
+      countHolder[word] = 1;
     }else{
       countHolder[word] = countHolder[word] + 1
     }
+  }}
+  console.log("object", countHolder);
+  console.log("keys arr", keys);
+
+  const compare = (a, b) => {
+    let countA = countHolder[a]
+    let countB = countHolder[b]
+    return (countB - countA)
   }
-}
-console.log("?", countHolder);
+  keys.sort(compare)
+  console.log("KEYs!!", keys);
 
-const compare = (a, b) => {
-  let countA = keys[a]
-  let countB = keys[b]
-  return (countB - countA)
-}
-keys.sort()
-console.log("KEYs!!", keys);
-
-for (let i = 0; i < keys.length; i++) {
-  let key = keys[i]
-console.log("KEY!!", key);
-  $('#appendFrequency').append(`${key} : ${countHolder[key]}`)
+  for (let i = 0; i < 15; i++) {
+    let key = keys[i]
+  console.log("KEY!!", key);
+    $('#appendFrequency').append(`<p>${key}: ${countHolder[key]} </p>`)
+  }
+  console.log("countHolder", countHolder);
 }
 console.log(setUp(temp));
-console.log(countHolder);
-console.log();
+
+// console.log("object", countHolder);
+// console.log("keys arr", keys);
+//
+// const compare = (a, b) => {
+//   let countA = countHolder[a]
+//   let countB = countHolder[b]
+//   return (countB - countA)
+// }
+// keys.sort(compare)
+// console.log("KEYs!!", keys);
+//
+// for (let i = 0; i < textArr.length; i++) {
+//   let key = textArr[i]
+// console.log("KEY!!", key);
+//   $('#appendFrequency').append(`${key}`)
+// }
+// console.log(setUp(temp));
+// console.log("countHolder", countHolder);
 </script>
+
 <!-- end word count functionality -->
 <!-- ====================================================================== -->
-<!-- ====================================================================== -->
-<!-- ====================================================================== -->
-
-
-
-
-
 
 
     <!-- Bootstrap core JavaScript
-    ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>
@@ -293,6 +294,6 @@ console.log();
     <script src="bootstrap-3.3.7/docs/assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
-</body>
 
+</body>
 </html>
