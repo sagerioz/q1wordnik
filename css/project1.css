@@ -102,6 +102,9 @@
             display: inline-block;
             clear: both;
         }
+        .favorite-star-character{
+          font-size: 20px;
+        }
     }
 
     @media screen and (max-width: 768px) {
@@ -182,5 +185,8 @@
             display: inline-block;
             margin: 10px;
             margin-bottom: 15px;
+        }
+        .favorite-star-character{
+          font-size: 20px;
         }
     }

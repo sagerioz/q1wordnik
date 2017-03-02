@@ -9,7 +9,7 @@ $(document).ready(function() {
 `,
     dataType: 'json',
     success: function(data) {
-      return wordOfTheDayFunc(data)
+      //return wordOfTheDayFunc(data)
     },
     error: function() {
       $('input').val("Enter something here to search")
@@ -18,9 +18,9 @@ $(document).ready(function() {
   })
 
   const wordOfTheDayFunc = (data) => {
-    $('#target_ul').append(`<li class="WOTD"><p class="special">Word of the Day </p><p><em> '${data.word}'</em></p></li>`)
+    $('#target_ul').append(`<li class="WOTD"><hr><p class="special">Word of the Day </p><p><em> '${data.word}'</em></p></li>`)
     $('#target_ul').append(`<li class="WOTD"><p class="special">Definition </p><p><em>${data.note}</em></p></li>`)
-    $('#target_ul').append(`<li class="WOTD"><p class="special">More </p><p><em>${data.definitions[0].text}</em></p></li>`)
+    $('#target_ul').append(`<li class="WOTD"><p class="special">More </p><p><em>${data.definitions[0].text}</em></p><hr></li>`)
   }
 
   $('#search').click(function() {
@@ -275,7 +275,7 @@ $("#second_nav_sidebar_actions").click(function(){
     } else {
       $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
       $('#tbody').append(
-        `<td class="rhymes" colspan="3"><p class="special">Rhyming</p><em> Sorry, no data available for "${keySearchTerm}" available.</em></p></td>`)
+        `<td class="rhymes" colspan="3"><p class="special">Rhyming</p><em> Sorry, no data available for '${keySearchTerm}' available.</em></p></td>`)
     }
   }
 
@@ -298,7 +298,7 @@ $("#second_nav_sidebar_actions").click(function(){
       } else {
         $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
         $('#tbody').append(
-          `<td colspan="3"><p class="special">Etymology </p><em>Sorry, no data available for "${keySearchTerm}" available.</em></p></td>`)
+          `<td colspan="3"><p class="special">Etymology </p><em>Sorry, no data available for '${keySearchTerm}' available.</em></p></td>`)
       }
 
     }
@@ -315,7 +315,7 @@ $("#second_nav_sidebar_actions").click(function(){
         } else {
           $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
           $('#tbody').append(
-            `<td colspan="3"><p class="special">Synonyms </p><em>Sorry, no data available for ${keySearchTerm}.</em></p></td>`)
+            `<td colspan="3"><p class="special">Synonyms </p><em>Sorry, no data available for '${keySearchTerm}'.</em></p></td>`)
         }
       }
 
@@ -331,7 +331,7 @@ $("#second_nav_sidebar_actions").click(function(){
           } else {
             $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
             $('#tbody').append(
-              `<td colspan="3"><p class="special">Same Context<p><em> Sorry, no data available for ${keySearchTerm}.</em></p></td>`)
+              `<td colspan="3"><p class="special">Same Context<p><em> Sorry, no data available for '${keySearchTerm}'.</em></p></td>`)
           }
         }
 
@@ -346,7 +346,7 @@ $("#second_nav_sidebar_actions").click(function(){
             } else {
               $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
               $('#tbody').append(
-                `<td colspan="3"><p class="special">Antonyms </p><em>Sorry, no data available for "${keySearchTerm}".</em></p></td>`)
+                `<td colspan="3"><p class="special">Antonyms </p><em>Sorry, no data available for '${keySearchTerm}'.</em></p></td>`)
             }
           }
 
@@ -362,7 +362,7 @@ $("#second_nav_sidebar_actions").click(function(){
               } else {
                 $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
                 $('#tbody').append(
-                  `<td colspan="3"><p class="special">Cross-references</p><em> Sorry, no data available for "${keySearchTerm}".</em></p></td>`)
+                  `<td colspan="3"><p class="special">Cross-references</p><em> Sorry, no data available for '${keySearchTerm}'.</em></p></td>`)
               }
             }
 
@@ -378,7 +378,7 @@ $("#second_nav_sidebar_actions").click(function(){
                 } else {
                   $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
                   $('#tbody').append(
-                    `<td colspan="3"><p><b>Same context</b><em> Sorry, no examples available for "${keySearchTerm}".</em></p></td>`)
+                    `<td colspan="3"><p><b>Same context</b><em> Sorry, no examples available for '${keySearchTerm}'.</em></p></td>`)
                 }
               }
 
@@ -394,7 +394,7 @@ $("#second_nav_sidebar_actions").click(function(){
                   } else {
                     $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
                     $('#tbody').append(
-                      `<td colspan="3"><p class="special">Pronounciation</p><em> Sorry, no data available for "${keySearchTerm}".</em></p></td>`)
+                      `<td colspan="3"><p class="special">Pronounciation</p><em> Sorry, no data available for '${keySearchTerm}'.</em></p></td>`)
                   }
                 }
 
