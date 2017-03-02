@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <link rel="icon" href="bootstrap-3.3.7/docs/favicon.ico">
 
-  <title>WordTweeze Text Editor</title>
+  <title>WordTweeze</title>
 
   <!-- Bootstrap core CSS -->
   <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -127,7 +127,7 @@
           <div id="editor">
           </div>
           <button type="button" name="butnSave" id="saveDelta">Save</button>
-          <button type="button" name="" id="butnCount">Word Count</button>
+          <button type="button" name="" id="butnCount">Word Frequency</button>
           <div id="appendFrequency"></div>
 
             <!-- Initialize Quill editor -->
@@ -190,8 +190,8 @@
 
           quill.setContents({
               "ops":[
-                  {"insert":`Within our society, there is an individual. An individual with individual thoughts and actions. But who determines whether or not that individual is correct in their choices? Are our thoughts brain washed through the media with it's hellish ideas or our closet friends that try to direct us in the right direction? No one may ever know what is right or wrong.
-          So what is ethical relativism anyway? And who is behind all of the madness of ethical relativism? It is my understanding that relativist's are believed to think that relativism is true. Ethical Relativism is of a mind to say that whatever one's culture says is right is the right thing for him or her to do. This world we human beings live in is not without a variety of many different and diverse cultures with different cultural practices and hence different moralities. Studying ethics from a philosophical point of view, ethical relativist's might conclude that your wasting your time just like philosophers have always wasted they're time.\n`},
+                  {"insert":`Within our society, there is an individual. An individual with individual thoughts and actions. But who determines whether or not that individual is correct in their choices? Are our thoughts brain washed through the media with it's hellish ideas or our closet friends that try to direct us in the right direction? No individual may ever know what is right or wrong.
+          So what is ethical relativism anyway? And who is behind all of the madness of ethical relativism? It is my understanding that relativist's are believed to think that relativism is true. Ethical Relativism is of a mind to say that whatever one's culture says is right is the right thing for him or her to do. This world we different human beings live in is not without a variety of many different and diverse cultures with different cultural practices and hence different moralities. Studying ethics from a philosophical point of view, ethical relativist's might conclude that your wasting your time just like philosophers have always wasted they're time.\n`},
               ]
           });
 
@@ -218,19 +218,15 @@
 <script type="text/javascript">
 
 let temp = `Within our society, there is an individual. An individual with individual thoughts and actions. But who determines whether or not that individual is correct in their choices? Are our thoughts brain washed through the media with it's hellish ideas or our closet friends that try to direct us in the right direction? No one may ever know what is right or wrong.
-So what is ethical relativism anyway? And which individual is behind all of the madness of ethical relativism? It is my understanding that relativist's are believed to think that relativism is true. Ethical Relativism is of a mind to say that whatever one's culture says is right is the right thing for him or her to do. This world we human beings live in is not without a variety of many different and diverse cultures with different cultural practices and hence different moralities. Studying ethics from a philosophical point of view, ethical relativist's might conclude that your wasting your time just like philosophers have always wasted they're time.`
+So what is ethical relativism anyway? And which individual is behind all of the madness of ethical relativism? It is my understanding that relativist's are believed to think that relativism is true. Ethical Relativism is of a mind to say that whatever one's culture says is right is the right thing for him or her to do. This world we human beings live in is not without a variety of many different and diverse cultures with different cultural practices and hence different moralities. Studying ethics from a different philosophical point of view, ethical relativist's might conclude that your wasting your time just like philosophers have always wasted they're time.`
 
 let countHolder = {}
 let txtArr = [];
 let keys = [];
 const setUp = (string) => {
-  txtArr = string.split(/\W+/)//splits by all that is not a-z or 0-9 : meaning by spaces or punctuation. Need a better regex here! For ex., "can't" won't handle well
-  //console.log(txtArr);
-  console.log("text arr",txtArr);
-
+  txtArr = string.split(/\W+/)
   for (var j = 0; j < txtArr.length; j++) {
     let word = txtArr[j].toLowerCase()
-    console.log("WORD", word);
     if(!/\d+/.test(word)){
     if(countHolder[word]=== undefined){
       keys.push(word);
@@ -239,8 +235,6 @@ const setUp = (string) => {
       countHolder[word] = countHolder[word] + 1
     }
   }}
-  console.log("object", countHolder);
-  console.log("keys arr", keys);
 
   const compare = (a, b) => {
     let countA = countHolder[a]
@@ -248,14 +242,11 @@ const setUp = (string) => {
     return (countB - countA)
   }
   keys.sort(compare)
-  console.log("KEYs!!", keys);
 
   for (let i = 0; i < 15; i++) {
     let key = keys[i]
-  console.log("KEY!!", key);
     $('#appendFrequency').append(`<p>'${key}': ${countHolder[key]} </p>`)
   }
-  console.log("countHolder", countHolder);
 }
 $('#butnCount').click(function(){
   setUp(temp)

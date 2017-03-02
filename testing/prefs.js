@@ -1,11 +1,16 @@
 window.onload = init;
 
 function init() {
-    // localStorage.setItem("favGenre", "fiction");
-    var favoriteGenre = localStorage.getItem("favGenre");
 
-    var ul = document.getElementById("items");
-    var li = document.createElement("li");
-    li.innerHTML = favoriteGenre;
-    ul.appendChild(li);
+if(localStorage.getItem("favGenre") === null){
+  localStorage.setItem("favGenre", JSON.stringify(favString);
+  let favoriteGenre = JSON.parse(localStorage.getItem("favGenre"));
+  console.log(favoriteGenre);
+  // let = document.getElementById("items");
+  // let li = document.createElement("li");
+  // li.innerHTML = favoriteGenre;
+  // ul.appendChild(li);
+
+}
+
 }
