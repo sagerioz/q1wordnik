@@ -71,6 +71,11 @@
     button#search:focus {
         outline: none;
     }
+    #saveDelta {
+        display: inline-block;
+        margin: 10px;
+        margin-bottom: 15px;
+    }
 
     @media (min-width: 768px) {
         .navbar-form .form-control {
@@ -94,10 +99,8 @@
             margin-right: 15px;
         }
         .footer {
-            display: inline;
+            display: inline-block;
             clear: both;
-            margin: auto;
-            margin-top: 20px;
         }
     }
 
@@ -173,6 +176,11 @@
         .footer {
             display: inline-block;
             clear: both;
-            text-align: center;
+            text-align: left;
+        }
+        #saveDelta {
+            display: inline-block;
+            margin: 10px;
+            margin-bottom: 15px;
         }
     }

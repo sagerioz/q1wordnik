@@ -71,7 +71,7 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-left">
-          <li><a href="#">Text Editor</a></li>
+          <li><a href="./index.html">Text Editor</a></li>
           <li><a href="#">Settings</a></li>
           <li><a href="#">Profile</a></li>
           <li><a href="#">Help</a></li>
@@ -88,6 +88,9 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
+
+
+
 
         <ul class="nav nav-sidebar">
           <li class="active"><a href="./overview.html">Overview <span class="sr-only">(current)</span></a></li>
@@ -110,15 +113,104 @@
         </ul>
         <ul class="nav nav-sidebar" id="second_nav_sidebar_actions">
           <li><a href="" id="WOTD">Word of the Day</a></li>
+          <li><a href="#" data-toggle="dropdown" class="dropdown-toggle-favs">Favorite Words <b class="caret"></b></a>
+        <ul class="dropdown-menu" id="addfav">
+          <li><a href="#" class="addfav">add to me</a></li>
         </ul>
+      </li>
       </div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+
         <form class="navbar-form navbar-right">
+
           <input type="text" class="form-control" placeholder="tweeze a word">
           <button type="button" class="btn btn-default btn-sm" id="search"><span class="glyphicon glyphicon-ok"></span> </button>
         </form>
-        <h1 class="page-header" id="mainTitle">Tweeze Editor</h1>
+        <h1 class="page-header" id="mainTitle">Tweeze Editor</h1><span class="favorite-star-character" id="star"></span>
         <div id="displayDiv">
+
+          <!-- Create the editor container -->
+<!-- ====================================================================== -->
+
+          <div id="toolbar">
+          </div>
+          <div id="editor">
+          </div>
+          <button type="button" name="butnSave" id="saveDelta">Save</button>
+          <button type="button" name="butnCount" id="">Word Count</button>
+          <div id="appendFrequency"></div>
+
+            <!-- Initialize Quill editor -->
+<!-- ====================================================================== -->
+<!-- ====================================================================== -->
+<!-- ====================================================================== -->
+
+          <script >
+
+          var toolbarOptions = [
+            ['bold', 'italic', 'underline', 'strike'],
+            ['blockquote', 'code-block'],
+            [{'list': 'ordered'}, {'list': 'bullet'}],
+            [{'indent': '-1'}, {'indent': '+1'}],
+            [{'size': ['small', false, 'large', 'huge']}],
+            ['link','image','video','formula'],
+            [{'color': []}, {'background': []} ],
+            [{'font': []}],
+            [{'align': []}]
+
+          ]
+          var delta = {}
+          var quill = new Quill('#editor', {
+            debug: 'info',
+          modules: {
+            toolbar: toolbarOptions
+          },
+          placeholder: 'Compose...',
+          theme: 'snow'
+          });
+          quill.clipboard.addMatcher (Node.ELEMENT_NODE, function (node, delta) {
+              var plaintext = $ (node).text();
+              return new Delta().insert (plaintext);
+          });
+
+          quill.clipboard.addMatcher(Node.TEXT_NODE, function(node, delta) {
+            return new Delta().insert(node.data);
+          });
+
+          function get_selection() {
+              var txt = '';
+              if (window.getSelection) {
+                  txt = window.getSelection();
+              } else if (document.getSelection) {
+                  txt = document.getSelection();
+              } else if (document.selection) {
+                  txt = document.selection.createRange().text;
+              }
+              return txt;
+          }
+          function SelectAll(id)
+          {
+              document.getElementById(id).focus();
+              document.getElementById(id).select();
+          }
+
+          function copy()
+          {
+              SelectAll('textAreaID');
+              document.execCommand("Copy", false, null);
+          }
+
+          quill.setContents({
+              "ops":[
+                  {"insert":`Within our society, there is an individual. An individual with individual thoughts and actions. But who determines whether or not that individual is correct in their choices? Are our thoughts brain washed through the media with it's hellish ideas or our closet friends that try to direct us in the right direction? No one may ever know what is right or wrong.
+          So what is ethical relativism anyway? And who is behind all of the madness of ethical relativism? It is my understanding that relativist's are believed to think that relativism is true. Ethical Relativism is of a mind to say that whatever one's culture says is right is the right thing for him or her to do. This world we human beings live in is not without a variety of many different and diverse cultures with different cultural practices and hence different moralities. Studying ethics from a philosophical point of view, ethical relativist's might conclude that your wasting your time just like philosophers have always wasted they're time.\n`},
+              ]
+          });
+
+          </script>
+
+
           <ul class="nav" id="target_ul"></ul>
           <table class="table" id="main_table">
             <thead>
@@ -131,95 +223,62 @@
             <tbody id="tbody">
             </tbody>
           </table>
-        </div>
+        </div><br>
 
-<!-- Create the editor container -->
+<!-- word count functionality -->
+<!-- ====================================================================== -->
+<!-- ====================================================================== -->
 <!-- ====================================================================== -->
 
-<div id="toolbar">
-</div>
-<div id="editor">
-</div>
-<button type="button" name="button" id="saveDelta">Save</button>
-  <!-- Initialize Quill editor -->
-<script>
-// var BackgroundClass = Quill.import('attributors/class/background');
-// var ColorClass = Quill.import('attributors/class/color');
-// var SizeStyle = Quill.import('attributors/style/size');
-// Quill.register(BackgroundClass, true);
-// Quill.register(ColorClass, true);
-// Quill.register(SizeStyle, true);
-var toolbarOptions = [
-  ['bold', 'italic', 'underline', 'strike'],
-  ['blockquote', 'code-block'],
-  [{'list': 'ordered'}, {'list': 'bullet'}],
-  [{'indent': '-1'}, {'indent': '+1'}],
-  [{'size': ['small', false, 'large', 'huge']}],
-  ['link','image','video','formula'],
-  [{'color': []}, {'background': []} ],
-  [{'font': []}],
-  [{'align': []}]
+<script type="text/javascript">
 
-]
-var delta = {}
-var quill = new Quill('#editor', {
-  debug: 'info',
-modules: {
-  toolbar: toolbarOptions
-},
-placeholder: 'Compose...',
-theme: 'snow'
-});
-quill.clipboard.addMatcher (Node.ELEMENT_NODE, function (node, delta) {
-    var plaintext = $ (node).text();
-    return new Delta().insert (plaintext);
-});
-// $('#saveDelta').click(function(){
-//   window.delta = quill.getContents()
-//   console.log(delta);
-// })
-quill.clipboard.addMatcher(Node.TEXT_NODE, function(node, delta) {
-  return new Delta().insert(node.data);
-});
-
-function get_selection() {
-    var txt = '';
-    if (window.getSelection) {
-        txt = window.getSelection();
-    } else if (document.getSelection) {
-        txt = document.getSelection();
-    } else if (document.selection) {
-        txt = document.selection.createRange().text;
+let temp = `Within our society, there is an individual. An individual with individual thoughts and actions. But who determines whether or not that individual is correct in their choices? Are our thoughts brain washed through the media with it's hellish ideas or our closet friends that try to direct us in the right direction? No one may ever know what is right or wrong.
+So what is ethical relativism anyway? And which individual is behind all of the madness of ethical relativism? It is my understanding that relativist's are believed to think that relativism is true. Ethical Relativism is of a mind to say that whatever one's culture says is right is the right thing for him or her to do. This world we human beings live in is not without a variety of many different and diverse cultures with different cultural practices and hence different moralities. Studying ethics from a philosophical point of view, ethical relativist's might conclude that your wasting your time just like philosophers have always wasted they're time.`
+let countHolder = {}
+let txtArr = [];
+let keys = [];
+const setUp = (string) => {
+  txtArr = string.split(/\W+/)//splits by all spaces or punctuation. Need a better regex here! For ex., "can't" won't handle well
+  //console.log(txtArr);
+  for (var j = 0; j < txtArr.length; j++) {
+    let word = txtArr[j].toLowerCase()
+    if(countHolder[word]=== undefined){
+      countHolder[word] = 1;
+      keys.push(word);
+    }else{
+      countHolder[word] = countHolder[word] + 1
     }
-    return txt;
+  }
 }
-function SelectAll(id)
-{
-    document.getElementById(id).focus();
-    document.getElementById(id).select();
+console.log("?", countHolder);
+
+const compare = (a, b) => {
+  let countA = keys[a]
+  let countB = keys[b]
+  return (countB - countA)
 }
+keys.sort()
+console.log("KEYs!!", keys);
 
-function copy()
-{
-    SelectAll('textAreaID');
-    document.execCommand("Copy", false, null);
+for (let i = 0; i < keys.length; i++) {
+  let key = keys[i]
+console.log("KEY!!", key);
+  $('#appendFrequency').append(`${key} : ${countHolder[key]}`)
 }
-
-quill.setContents({
-    "ops":[
-        {"insert":"this is a test bit of text\n"},
-    ]
-});
-
-$(document).dblclick(function(e) {
-    var wordToTweeze = get_selection();
-    keySearchTerm = wordToTweeze;
-    $('input').val(wordToTweeze)
-
-});
+console.log(setUp(temp));
+console.log(countHolder);
+console.log();
 </script>
-      </div>
-    </div>
+<!-- end word count functionality -->
+<!-- ====================================================================== -->
+<!-- ====================================================================== -->
+<!-- ====================================================================== -->
+
+
+
+
+
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

@@ -13,17 +13,19 @@ $(document).ready(function() {
     },
     error: function() {
       $('input').val("Enter something here to search")
-      $('#target_ul').append(`<li><p class="special">Sorry, <em>something went wrong with our query</em></p></li>`)
+      $('#target_ul').append(`<li><p class="special"><em>Error: something went wrong with your query</em></p></li>`)
     }
   })
 
   const wordOfTheDayFunc = (data) => {
-    $('#target_ul').append(`<li><p class="special">Word of the Day </p><p><em> ${data.word}</em></p></li>`)
-    $('#target_ul').append(`<li><p class="special">Definition </p><p><em>${data.note}</em></p></li>`)
+    $('#target_ul').append(`<li class="WOTD"><p class="special">Word of the Day </p><p><em> '${data.word}'</em></p></li>`)
+    $('#target_ul').append(`<li class="WOTD"><p class="special">Definition </p><p><em>${data.note}</em></p></li>`)
+    $('#target_ul').append(`<li class="WOTD"><p class="special">More </p><p><em>${data.definitions[0].text}</em></p></li>`)
   }
 
   $('#search').click(function() {
     event.preventDefault()
+    $('#star').innerHTML = '&#9734;'
     // to reset the target viewport for a new search term
     $('tbody').children().remove();
     $('#target_ul').empty()
@@ -33,11 +35,12 @@ $(document).ready(function() {
     if (userInput.length > 0) {
 
       const processResults = (data) => {
-        let displayWordToTweeze = $('#mainTitle')[0]
+        let displayWordToTweeze = $('#mainTitle')[0]//h1 tag
         let displayInfoArea = $('#target_ul')[0]
         displayInfoArea.innerHTML = ''
         let tweeze = data[0]
         displayWordToTweeze.innerHTML = `&ldquo;<em>${data[0].word} </em>&rdquo;`;
+        $('#star').append(`&#9734; `)
         $('#target_ul').append(`<li><p class="special">Part of Speech </p><p><em> ${tweeze.partOfSpeech}</em></p></li>`)
         $('#target_ul').append(`<li><p class="special">Definition </p><p><em>${tweeze.text}</em></p></li>`)
         $('input').val('')
@@ -54,7 +57,7 @@ $(document).ready(function() {
         },
         error: function() {
           $('input').val("Search a word").focus()
-          $('#myModal').modal("Error: something went wrong with your API search!");
+          $('#myModal').modal("Word spelling error");
         }
       })
     } else {
@@ -62,7 +65,23 @@ $(document).ready(function() {
     }
   })
 
-  // =========================click events on side nav bar========================
+  $(document).dblclick(function(e) {
+      var wordToTweeze = get_selection();
+      keySearchTerm = wordToTweeze;
+      $('input').val(wordToTweeze)
+      $('#star').innerHTML = '&#9734;'
+  });
+
+// ======================click event on favorites button========================
+$(".favorite-star-character").click(function(){
+  event.preventDefault()
+  let star = event.target;
+  star.innerHTML = '&#x1f31f;'
+  console.log("ADDFAV", $('#addfav'));
+ $('#addfav').append(`<li><a href="#" id="add" class="addfav">${keySearchTerm}</a></li>`)
+})
+
+// =========================click events on side nav bar========================
 $("#second_nav_sidebar_actions").click(function(){
   if($(event.target).is("#WOTD")){
     event.preventDefault();
@@ -72,7 +91,10 @@ $("#second_nav_sidebar_actions").click(function(){
     `,
       dataType: 'json',
       success: function(data) {
-        return wordOfTheDayFunc(data)
+        if($('#target_ul').children('li').hasClass('WOTD')){}
+        else{
+          return wordOfTheDayFunc(data)
+        }
       },
       error: function() {
         $('input').val("Search word").focus()
@@ -244,11 +266,11 @@ $("#second_nav_sidebar_actions").click(function(){
   })
 
 // ================================= functions =============================== //
-  const processRhymes = (data) => {
+  const rhymeFunc = (data) => {
     let tweeze = data[0]
     if (tweeze !== undefined) {
-      $('#target_ul').append(`<li><p class="special">Rhyming</p></b></li>`)
-      $('#target_ul').append(`<li><p><em>${tweeze.words}</em></p></li>`)
+      $('#target_ul').append(`<li class="rhymes"><p class="special">Rhyming</p></b></li>`)
+      $('#target_ul').append(`<li class="rhymes"><p><em>${tweeze.words}</em></p></li>`)
 
     } else {
       $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
@@ -375,6 +397,12 @@ $("#second_nav_sidebar_actions").click(function(){
                       `<td colspan="3"><p class="special">Pronounciation</p><em> Sorry, no data available for "${keySearchTerm}".</em></p></td>`)
                   }
                 }
-  // }
+
+
+
+
+
+
+
   // end document ready
 })
