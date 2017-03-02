@@ -106,7 +106,7 @@
           <li><a href="" id="WOTD">Word of the Day</a></li>
           <li><a href="#" data-toggle="dropdown" class="dropdown-toggle-favs">Favorite Words <b class="caret"></b></a>
         <ul class="dropdown-menu" id="addfav">
-          <li><a href="#" class="addfav">add to me</a></li>
+          <li><a href="#" class="addfav">&#9734; make your list!</a></li>
         </ul>
       </li>
       </div>
@@ -127,7 +127,7 @@
           <div id="editor">
           </div>
           <button type="button" name="butnSave" id="saveDelta">Save</button>
-          <button type="button" name="butnCount" id="">Word Count</button>
+          <button type="button" name="" id="butnCount">Word Count</button>
           <div id="appendFrequency"></div>
 
             <!-- Initialize Quill editor -->
@@ -253,30 +253,14 @@ const setUp = (string) => {
   for (let i = 0; i < 15; i++) {
     let key = keys[i]
   console.log("KEY!!", key);
-    $('#appendFrequency').append(`<p>${key}: ${countHolder[key]} </p>`)
+    $('#appendFrequency').append(`<p>'${key}': ${countHolder[key]} </p>`)
   }
   console.log("countHolder", countHolder);
 }
-console.log(setUp(temp));
+$('#butnCount').click(function(){
+  setUp(temp)
+})
 
-// console.log("object", countHolder);
-// console.log("keys arr", keys);
-//
-// const compare = (a, b) => {
-//   let countA = countHolder[a]
-//   let countB = countHolder[b]
-//   return (countB - countA)
-// }
-// keys.sort(compare)
-// console.log("KEYs!!", keys);
-//
-// for (let i = 0; i < textArr.length; i++) {
-//   let key = textArr[i]
-// console.log("KEY!!", key);
-//   $('#appendFrequency').append(`${key}`)
-// }
-// console.log(setUp(temp));
-// console.log("countHolder", countHolder);
 </script>
 
 <!-- end word count functionality -->
