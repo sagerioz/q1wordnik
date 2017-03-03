@@ -8,10 +8,11 @@
 ####WordTweeze - Groom Your Essays, Letters and Poems with Tools that Build Language Skills
 
 ## What problem does your project solve?
-####In essays, letters and poems, this app will help authors expand vocabulary, expand their understanding of the words they already use, and see visually how many times they choose to use words with a word count.
+#### While creating essays, letters and poems, this app will help authors expand vocabulary, increase their understanding of the words they already use, and see visually how many times they choose to use words with a word count. They will have the opportunity to open and edit their own text files and then save them after "grooming" the vocabulary with the app.
+#### My MVP goal is to provide a single word search for the API to make calls upon and display the results.
 
 ## Who has this problem?
-#### Students, authors, FaceBook posters
+#### Students, authors, FaceBook posters, frustrated poets
 
 ## How will your project solve this problem?
 #### With API calls, this app will offer tutelage in specific word definitions, etymology, examples of use, related words and frequency (word usage over time). This will provide the user the opportunity to choose different and better words in the writing process.
@@ -26,8 +27,7 @@
 #### Quill and Wordnik
 
 ## What technologies do you plan to use?
-#### HTML, CSS, Javascript, JQuery, Bootstrap or Materialize, Agile
+#### HTML, CSS, Javascript, JQuery, Bootstrap for the front-end
 
 ## Feature list
-#### Header, Footer, Input (Search) fields, Options ('save file', 'share to social media'), Button Column with API calls, display area
-# q1wordnik
+#### Header, Footer, Input (Search) fields, Text Editor, Options ('word frequency', 'save'), Button Column with API calls, display area
