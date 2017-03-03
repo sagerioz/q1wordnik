@@ -10,7 +10,6 @@
     }
 
     body {
-        /*font-family: "Roboto", BlinkMacSystemFont, "Segoe UI", vOxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;*/
         font-size: 14px;
         line-height: 1.62;
         font-family: 'Source Code Pro', monospace;
@@ -31,17 +30,6 @@
 
     #logo {
         color: #ff536e;
-    }
-
-    .navbar-fixed-top {
-        /*height: 100px;*/
-        /*padding-top: 10px;*/
-        /*padding-bottom: 10px;*/
-    }
-
-    img {
-        /*margin-top: 5px;
-  margin-bottom: 5px;*/
     }
 
     .table>thead>tr>th {
