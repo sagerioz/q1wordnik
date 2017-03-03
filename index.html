@@ -73,7 +73,6 @@
         <ul class="nav navbar-nav navbar-left">
           <li><a href="./index.html">Text Editor</a></li>
           <li><a href="./profile.html">Profile</a></li>
-          <li><a href="#">Help</a></li>
         </ul>
       </div>
     </div>
@@ -86,8 +85,8 @@
           <li class="active"><a href="./overview.html">Overview <span class="sr-only">(current)</span></a></li>
         </ul>
         <ul class="nav nav-sidebar" id="nav_sidebar_actions">
-          <li><a href="" id="example">Example</a></li>
           <li><a href="" id="definitions">More Definitions</a></li>
+          <li><a href="" id="example">Example</a></li>
           <li><a href="#" data-toggle="dropdown" class="dropdown-toggle">Related Words <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="#" id="synonym">synonym</a></li>
@@ -125,8 +124,8 @@
           </div>
           <div id="editor">
           </div>
-          <button type="button" name="butnSave" id="saveDelta">Save</button>
-          <button type="button" name="" id="butnCount">Word Frequency</button>
+          <button type="button" name="butnSave" id="saveDelta" class="btn btn-default btn-sm">Save</button>
+          <button type="button" name="" id="butnCount" class="btn btn-default btn-sm">Word Frequency</button>
             <div id="appendFrequency"></div>
 
 
@@ -191,7 +190,7 @@
 
           quill.setContents({
               "ops":[
-                  {"insert":`Within our society, there is an individual. An individual with individual thoughts and actions. But who determines whether or not that individual is correct in their choices? Are our thoughts brain washed through the media with it's hellish ideas or our closet friends that try to direct us in the right direction? No individual may ever know what is right or wrong.
+                  {"insert":`Within our society, there is an individual. An individual with individual thoughts and actions. But who determines whether or not that individual is correct in their choices? Are our thoughts brain washed through the media with it's hellish ideas or our closet friends that try to direct us in the right direction? No individual may ever know what is right or wrong or moral.
           So what is ethical relativism anyway? And who is behind all of the madness of ethical relativism? It is my understanding that relativist's are believed to think that relativism is true. Ethical Relativism is of a mind to say that whatever one's culture says is right is the right thing for him or her to do. This world we different human beings live in is not without a variety of many different and diverse cultures with different cultural practices and hence different moralities. Studying ethics from a philosophical point of view, ethical relativist's might conclude that your wasting your time just like philosophers have always wasted they're time.\n`},
               ]
           });
@@ -217,7 +216,7 @@
 
 <script type="text/javascript">
 
-let temp = `Within our society, there is an individual. An individual with individual thoughts and actions. But who determines whether or not that individual is correct in their choices? Are our thoughts brain washed through the media with it's hellish ideas or our closet friends that try to direct us in the right direction? No one may ever know what is right or wrong.
+let temp = `Within our society, there is an individual. An individual with individual thoughts and actions. But who determines whether or not that individual is correct in their choices? Are our thoughts brain washed through the media with it's hellish ideas or our closet friends that try to direct us in the right direction? No one may ever know what is right or wrong or moral.
 So what is ethical relativism anyway? And which individual is behind all of the madness of ethical relativism? It is my understanding that relativist's are believed to think that relativism is true. Ethical Relativism is of a mind to say that whatever one's culture says is right is the right thing for him or her to do. This world we human beings live in is not without a variety of many different and diverse cultures with different cultural practices and hence different moralities. Studying different ethics from different philosophical points of view, ethical relativist's might conclude that your wasting your time just like philosophers have always wasted they're time.`
 
 let countHolder = {}
@@ -243,7 +242,7 @@ const setUp = (string) => {
   }
   keys.sort(compare)
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < keys.length; i++) {
     let key = keys[i]
       $('#appendFrequency').addClass('freqClass')
     $('#appendFrequency').append(`<p class="freq">'${key}': ${countHolder[key]} </p>`)

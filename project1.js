@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 
 // ======================== local storage ====================================>
-//window.onload = init;
+
 
 function init() {
 
@@ -99,6 +99,7 @@ return favoriteGenre
     $('input').val(wordToTweeze)
     $('#star').html('')
     $("input").delay(100).fadeOut().fadeIn('slow')
+    $("input").addCLass('form-control')
   });
 
 // ======================click event on favorites button========================
@@ -307,7 +308,7 @@ return favoriteGenre
 
 
     } else {
-      $('#target_ul').prepend(`<li class="rhymes"><p><em>${tweeze.words}</em></p></li>`)
+    //  $('#target_ul').prepend(`<li class="rhymes"><p><em>${tweeze.words}</em></p></li>`)
       $('#target_ul').prepend(`<li class="rhymes"><p class="special">Rhyming </p><p><em> Sorry, no data available for '${keySearchTerm}'</li>`)
     }
   }
@@ -317,26 +318,15 @@ return favoriteGenre
       let definition = data[i].text
       $('#target_ul').append(`<li class="definitions"><p><b>${i}. </b><em>${definition}</em></p></li>`)
     }
-    // $('#target_ul').prepend(`<li class="definitions"><p class="special">More Definitions</p></li>`)
   }
 
   const entymologyFunc = (data) => {
     let tweeze = data[0]
     if (tweeze !== undefined) {
-      // $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      // $('#tbody').append(
-      //   `<td class="entymology" colspan="3"><p class="special">History and evolution</p></td>`)
-      // $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      // $('#tbody').append(
-      //   `<td colspan="3"><p><em>${tweeze.words}</em></p></td>`)
       $('#target_ul').prepend(`<li class="entymology"><p><em>${tweeze.words}</em></p></li>`)
       $('#target_ul').prepend(`<li class="entymology"><p class="special">History and evolution (etymology)</p></b></li>`)
     }
     else {
-      // $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      // $('#tbody').append(
-      //   `<td colspan="3"><p class="special">Etymology </p><em>Sorry, no data available for '${keySearchTerm}' available.</em></p></td>`)
-        //$('#target_ul').prepend(`<li class="rhymes"><p><em>${tweeze.words}</em></p></li>`)
         $('#target_ul').prepend(`<li class="entymology"><p class="special">Etymology </p><em>Sorry, no data available for '${keySearchTerm}'</em></p></li>`)
     }
   }
@@ -344,101 +334,66 @@ return favoriteGenre
   const synonymFunc = (data) => {
     let tweeze = data[0]
     if (tweeze !== undefined) {
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td class="synonym" colspan="3"><p class="special">Synonyms</p></td>`)
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td colspan="3"><p><em>${tweeze.words}</em></p></td>`)
+      $('#target_ul').prepend(`<li class="synonym"><p><em>${tweeze.words}</em></p></li>`)
+      $('#target_ul').prepend(`<li class="synonym"><p class="special">Synonyms</p></li>`)
     }
     else {
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td colspan="3"><p class="special">Synonyms </p><em>Sorry, no data available for '${keySearchTerm}'.</em></p></td>`)
+      $('#target_ul').prepend(`<li class="synonym"><p class="special">Synonyms </p><em>Sorry, no data available for '${keySearchTerm}'</em></p></li>`)
     }
   }
 
   const sameContextFunc = (data) => {
     let tweeze = data[0]
     if (tweeze !== undefined) {
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td class="same_context" colspan="3"><p class="special">Same context</p></td>`)
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td colspan="3"><p><em>${tweeze.words}</em></p></td>`)
+      $('#target_ul').prepend(`<li class="same_context"><p><em>${tweeze.words}</em></p></li>`)
+      $('#target_ul').prepend(`<li class="same_context"><p class="special">Same context</p></li>`)
     }
     else {
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td colspan="3"><p class="special">Same Context<p><em> Sorry, no data available for '${keySearchTerm}'.</em></p></td>`)
+      $('#target_ul').prepend(`<li class="same_context"><p class="special">Same context </p><em>Sorry, no data available for '${keySearchTerm}'</em></p></li>`)
     }
   }
 
   const antonymFunc = (data) => {
     let tweeze = data[0]
     if (tweeze !== undefined) {
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td class="antonym" colspan="3"><p class="special">Antonyms</p></td>`)
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(`<td colspan="3"><p><em>${tweeze.words}</em></p></td>`)
+      $('#target_ul').prepend(`<li class="antonym"><p><em>${tweeze.words}</em></p></li>`)
+      $('#target_ul').prepend(`<li class="antonym"><p class="special">Antonyms</p></li>`)
     }
     else {
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td colspan="3"><p class="special">Antonyms </p><em>Sorry, no data available for '${keySearchTerm}'.</em></p></td>`)
+      $('#target_ul').prepend(`<li class="antonym"><p class="special">Antonyms </p><em>Sorry, no data available for '${keySearchTerm}'</em></p></li>`)
     }
   }
 
   const crossRefFunc = (data) => {
     let tweeze = data[0]
     if (tweeze !== undefined) {
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td class="cross_ref" colspan="3"><p class="special">Cross references</p></td>`)
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td colspan="3"><p><em>${tweeze.words}</em></p></td>`)
+      $('#target_ul').prepend(`<li class="cross_ref"><p><em>${tweeze.words}</em></p></li>`)
+      $('#target_ul').prepend(`<li class="cross_ref"><p class="special">Cross references</p></li>`)
     }
     else {
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td colspan="3"><p class="special">Cross-references</p><em> Sorry, no data available for '${keySearchTerm}'.</em></p></td>`)
+      $('#target_ul').prepend(`<li class="cross_ref"><p class="special">Cross references </p><em>Sorry, no data available for '${keySearchTerm}'</em></p></li>`)
     }
   }
 
   const exampleFunc = (data) => {
     let tweeze = data
     if (tweeze !== undefined) {
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td class="example" colspan="3"><p class="special">Example of use</p></td>`)
-      $('#tbody').append('<tr class="tr_result_data"></tr>')
-      $('#tbody').append(
-        `<td colspan="2"><p><em>${tweeze.text}</em></p></td><td> </td>`)
+      $('#target_ul').prepend(`<li class="example"><p><em>${tweeze.text}</em></p></li>`)
+      $('#target_ul').prepend(`<li class="example"><p class="special">Example of use</p></li>`)
     }
     else {
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td colspan="3"><p><b>Same context</b><em> Sorry, no data available for '${keySearchTerm}'.</em></p></td>`)
+        $('#target_ul').prepend(`<li class="example"><p class="special">Example </p><em>Sorry, no data available for '${keySearchTerm}'</em></p></li>`)
     }
   }
 
   const pronunciationFunc = (data) => {
     let tweeze = data[0]
     if (tweeze !== undefined) {
-      $('#tbody').append('<tr class="tr_result_data"></tr>')
-      $('#tbody').append(
-        `<td class="pronunciation" colspan="3"><p class="special">Pronunciation</p><p> for "${keySearchTerm}"  </b></p></td>`)
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td colspan="2"><p><audio src="${tweeze.fileUrl}" controls></audio></p></td><td> </td>`)
+      $('#target_ul').prepend(`<li class="pronunciation"><p><audio src="${tweeze.fileUrl}" controls></audio></p></li>`)
+      $('#target_ul').prepend(`<li class="pronunciation"><p class="special">Pronunciation</p></li>`)
     }
     else {
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td colspan="3"><p class="special">Pronounciation</p><em> Sorry, no data available for '${keySearchTerm}'.</em></p></td>`)
+      $('#target_ul').prepend(`<li class="pronunciation"><p class="special">Pronunciation </p><em>Sorry, no data available for '${keySearchTerm}'</em></p></li>`)
     }
   }
 
