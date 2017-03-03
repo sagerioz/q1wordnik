@@ -110,6 +110,12 @@
         .favorite-star-character{
           font-size: 20px;
         }
+        .freqClass {
+          border: 1px solid grey;
+          overflow: auto;
+          height: 150px;
+          margin-bottom: 10px;
+        }
     }
 
     @media screen and (max-width: 768px) {
@@ -193,5 +199,11 @@
         }
         .favorite-star-character{
           font-size: 20px;
+        }
+        .freqClass {
+          border: 1px solid grey;
+          overflow: auto;
+          margin-bottom: 10px;
+          height: 150px;
         }
     }

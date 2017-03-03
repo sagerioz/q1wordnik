@@ -1,7 +1,31 @@
 // wordnik API key : f8f516018793386aa94e542a7222a0ee6717e9c23e5ab8a5c
 $(document).ready(function() {
   let keySearchTerm = ''
+  let favArr = []
 
+
+// ======================== local storage ====================================>
+//window.onload = init;
+
+function init() {
+
+if(localStorage.getItem("favGenre") === null){
+  localStorage.setItem("favGenre", JSON.stringify(favArr));
+  console.log(favoriteGenre);
+  // let = document.getElementById("items");
+  // let li = document.createElement("li");
+  // li.innerHTML = favoriteGenre;
+  // ul.appendChild(li);
+
+}else{
+
+  let favoriteGenre = JSON.parse(localStorage.getItem("favGenre"));
+}
+return favoriteGenre
+}
+
+
+// ============================ API calls ===================================>
   $.ajax({
     method: 'GET',
     url: `http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5
@@ -73,16 +97,18 @@ $(document).ready(function() {
     let wordToTweeze = get_selection();
     keySearchTerm = wordToTweeze;
     $('input').val(wordToTweeze)
-    $('#star').innerHTML = '&#9734;'
+    $('#star').html('')
+    $("input").delay(100).fadeOut().fadeIn('slow')
   });
 
 // ======================click event on favorites button========================
   $(".favorite-star-character").click(function() {
     event.preventDefault()
     let star = event.target;
-
     star.innerHTML = '&#x1f31f;'
     $('#addfav').append(`<li><a href="#" id="add" class="addfav">${keySearchTerm}</a></li>`)
+    favArr.push(keySearchTerm)
+    console.log("FAVARR", favArr);
   })
 
   // =========================click events on side nav bar========================
@@ -264,8 +290,11 @@ $(document).ready(function() {
       })
     }
     else if ($(event.target).is('#clear')) {
-      $('tbody').children().remove();
+      $('tbody').children().remove()
       $('#target_ul').empty()
+      $('#appendFrequency').children().remove()
+      $('#appendFrequency').removeClass('freqClass')
+
     }
   })
 
@@ -273,38 +302,42 @@ $(document).ready(function() {
   const rhymeFunc = (data) => {
     let tweeze = data[0]
     if (tweeze !== undefined) {
-      $('#target_ul').append(`<li class="rhymes"><p class="special">Rhyming</p></b></li>`)
-      $('#target_ul').append(`<li class="rhymes"><p><em>${tweeze.words}</em></p></li>`)
+      $('#target_ul').prepend(`<li class="rhymes"><p><em>${tweeze.words}</em></p></li>`)
+      $('#target_ul').prepend(`<li class="rhymes"><p class="special">Rhyming</p></b></li>`)
+
 
     } else {
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td class="rhymes" colspan="3"><p class="special">Rhyming</p><em> Sorry, no data available for '${keySearchTerm}' available.</em></p></td>`)
+      $('#target_ul').prepend(`<li class="rhymes"><p><em>${tweeze.words}</em></p></li>`)
+      $('#target_ul').prepend(`<li class="rhymes"><p class="special">Rhyming </p><p><em> Sorry, no data available for '${keySearchTerm}'</li>`)
     }
   }
 
   const definitionsFunc = (data) => {
-    $('#target_ul').append(`<li class="definitions"><p class="special">More Definitions</p></li>`)
     for (let i = 1; i < data.length; i++) {
       let definition = data[i].text
       $('#target_ul').append(`<li class="definitions"><p><b>${i}. </b><em>${definition}</em></p></li>`)
     }
+    // $('#target_ul').prepend(`<li class="definitions"><p class="special">More Definitions</p></li>`)
   }
 
   const entymologyFunc = (data) => {
     let tweeze = data[0]
     if (tweeze !== undefined) {
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td class="entymology" colspan="3"><p class="special">History and evolution</p></td>`)
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td colspan="3"><p><em>${tweeze.words}</em></p></td>`)
+      // $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+      // $('#tbody').append(
+      //   `<td class="entymology" colspan="3"><p class="special">History and evolution</p></td>`)
+      // $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+      // $('#tbody').append(
+      //   `<td colspan="3"><p><em>${tweeze.words}</em></p></td>`)
+      $('#target_ul').prepend(`<li class="entymology"><p><em>${tweeze.words}</em></p></li>`)
+      $('#target_ul').prepend(`<li class="entymology"><p class="special">History and evolution (etymology)</p></b></li>`)
     }
     else {
-      $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
-      $('#tbody').append(
-        `<td colspan="3"><p class="special">Etymology </p><em>Sorry, no data available for '${keySearchTerm}' available.</em></p></td>`)
+      // $('#tbody').append('<tr class="tr_result_data"><hr></tr>')
+      // $('#tbody').append(
+      //   `<td colspan="3"><p class="special">Etymology </p><em>Sorry, no data available for '${keySearchTerm}' available.</em></p></td>`)
+        //$('#target_ul').prepend(`<li class="rhymes"><p><em>${tweeze.words}</em></p></li>`)
+        $('#target_ul').prepend(`<li class="entymology"><p class="special">Etymology </p><em>Sorry, no data available for '${keySearchTerm}'</em></p></li>`)
     }
   }
 
